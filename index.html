@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de links | Inframe Polaroid</title>
+<meta name="description" content="Tudo o que a Inframe usa e recomenda para montar uma experiência de fotos instantâneas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E9E3DA;
+    --card:#FFFFFF;
+    --ink:#221F1C;
+    --soft:#6B635C;
+    --line:#D8CFC3;
+    --accent:#2E4257;
+    --accent-soft:#E6EBF1;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  .wrap{max-width:660px;margin:0 auto;padding:0 20px 72px}
+
+  /* Capa */
+  header.top{padding:56px 0 28px;text-align:center}
+  .brand{
+    font-family:"Fraunces",Georgia,serif;
+    font-size:14px;letter-spacing:.14em;color:var(--soft);
+    margin:0 0 22px;
+  }
+  h1{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:600;font-size:clamp(34px,8vw,50px);
+    line-height:1.05;margin:0 0 14px;letter-spacing:-.02em;
+  }
+  .lede{margin:0 auto;max-width:44ch;color:var(--soft);font-size:15px}
+
+  /* Filtros */
+  nav.filters{
+    position:sticky;top:0;z-index:5;
+    background:linear-gradient(var(--paper) 78%,rgba(233,227,218,0));
+    padding:14px 0 18px;margin-top:24px;
+  }
+  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;border:1px solid var(--line);background:transparent;
+    color:var(--soft);font:inherit;font-size:13.5px;
+    padding:7px 14px;border-radius:999px;cursor:pointer;
+    transition:background .15s ease,color .15s ease,border-color .15s ease;
+  }
+  .chip:hover{border-color:var(--ink);color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .chip:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* Seções */
+  section{margin-bottom:38px}
+  section[hidden]{display:none}
+  h2{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:600;font-size:21px;margin:0 0 4px;letter-spacing:-.01em;
+  }
+  .sec-note{margin:0 0 16px;color:var(--soft);font-size:14px}
+
+  /* Cartões: moldura de foto instantânea, com a "aba" branca embaixo */
+  .item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-bottom-width:1px;
+    border-radius:var(--radius);
+    padding:16px 18px;
+    margin-bottom:10px;
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    box-shadow:0 1px 0 rgba(34,31,28,.04);
+  }
+  .item .info{flex:1 1 200px;min-width:0}
+  .name{font-weight:600;font-size:16px;margin:0}
+  .note{margin:3px 0 0;font-size:13.5px;color:var(--soft)}
+  .go{
+    flex:0 0 auto;
+    display:inline-block;text-decoration:none;
+    background:var(--ink);color:#fff;
+    font-size:14px;font-weight:500;
+    padding:10px 18px;border-radius:8px;
+    transition:background .15s ease;
+  }
+  .go:hover{background:var(--accent)}
+  .coupon{
+    margin-top:10px;display:inline-flex;align-items:center;gap:8px;
+    background:var(--accent-soft);border:1px solid #cfd9e4;
+    color:var(--accent);font:inherit;font-size:13px;font-weight:600;
+    padding:6px 12px;border-radius:7px;cursor:pointer;
+  }
+  .coupon:hover{background:#dbe4ee}
+  .coupon .label{font-weight:500;color:#5b6b7c}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-top:20px;margin-top:8px;
+    color:var(--soft);font-size:13px;text-align:center;
+  }
+  footer strong{font-family:"Fraunces",Georgia,serif;font-weight:600;color:var(--ink);display:block;margin-bottom:4px;font-size:15px}
+  .empty{color:var(--soft);font-size:14px;padding:8px 2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <p class="brand">Inframe | Polaroid</p>
+    <h1>Lista de links</h1>
+    <p class="lede">Tudo o que usamos e recomendamos para montar uma experiência de fotos instantâneas, reunido em um só lugar.</p>
+  </header>
+
+  <nav class="filters" aria-label="Filtrar por categoria">
+    <div class="chips" id="chips"></div>
+  </nav>
+
+  <main id="lista"></main>
+
+  <footer>
+    <strong>Inframe | Polaroid</strong>
+    Florianópolis, SC. Preços e disponibilidade podem mudar na Shopee, e os cupons valem enquanto o vendedor mantiver a campanha ativa.
+  </footer>
+</div>
+
+<script>
+const DADOS = [
+  { cat:"Câmeras", nota:"Onde tudo começa: a máquina que transforma o momento em papel.", itens:[
+    { nome:"Instax Mini 13", url:"https://s.shopee.com.br/8Kp9fSteRn" },
+    { nome:"Instax Mini 12 + 60 filmes", url:"https://s.shopee.com.br/8KmC30Tmzo", obs:"Melhor custo-benefício do kit" },
+    { nome:"Instax Mini Evo", url:"https://s.shopee.com.br/3g0MUgWqJZ", obs:"Modelo híbrido, acabamento premium" }
+  ]},
+  { cat:"Filmes", nota:"Calcule cerca de 1,5 foto por convidado.", itens:[
+    { nome:"Pack com 20 filmes Instax", url:"https://s.shopee.com.br/30ndJSwfNq" },
+    { nome:"Pack com 100 filmes Instax", url:"https://s.shopee.com.br/80CJGghIBG", obs:"Ideal para eventos maiores" }
+  ]},
+  { cat:"Protetores de flash", nota:"Suavizam a luz e evitam fotos estouradas. O cupom vale nos três modelos.", itens:[
+    { nome:"Protetor de flash Mini 12", url:"https://s.shopee.com.br/7VF0hhfhR0", cupom:"FELIINF10" },
+    { nome:"Protetor de flash Mini 11", url:"https://s.shopee.com.br/qi6ldMMK8", cupom:"FELIINF10" },
+    { nome:"Protetor de flash SQ1", url:"https://s.shopee.com.br/7prr6X3hZW", cupom:"FELIINF10" }
+  ]},
+  { cat:"Guestbook e álbuns", nota:"Onde a memória fica guardada depois da festa.", itens:[
+    { nome:"Guestbook personalizado", url:"https://s.shopee.com.br/9fHjUnSgsi" },
+    { nome:"Mini álbum Instax", url:"https://s.shopee.com.br/5flQro3DMP" },
+    { nome:"Cantoneiras adesivas", url:"https://s.shopee.com.br/5LBY5dmHSa", obs:"Para colar as fotos sem danificar o papel" },
+    { nome:"Adesivos scrapbook", url:"https://s.shopee.com.br/AAFltJLKrD" }
+  ]},
+  { cat:"Acessórios", nota:"Detalhes que elevam a experiência do convidado.", itens:[
+    { nome:"Capa para câmera Mini 12", url:"https://s.shopee.com.br/901sqJhNcX" },
+    { nome:"Chaveiro para foto", url:"https://s.shopee.com.br/5LAW7qwg7C", cupom:"FELIINF10" },
+    { nome:"Moldura de acrílico magnética", url:"https://s.shopee.com.br/4fupL5JwO7" }
+  ]},
+  { cat:"Canetas", nota:"Escrita nítida sobre o papel do filme.", itens:[
+    { nome:"Caneta em gel branca", url:"https://s.shopee.com.br/5VTwKUbK66", obs:"Para fundos escuros" },
+    { nome:"Caneta estilo Stabilo", url:"https://s.shopee.com.br/AUscHkYXyy" }
+  ]},
+  { cat:"Estrutura do evento", nota:"O que sustenta a montagem no dia.", itens:[
+    { nome:"Mesa dobrável para evento", url:"https://s.shopee.com.br/6VNVU1Sm3P" }
+  ]}
+];
+
+const lista = document.getElementById("lista");
+const chips = document.getElementById("chips");
+
+DADOS.forEach((grupo, i) => {
+  const sec = document.createElement("section");
+  sec.dataset.cat = grupo.cat;
+  const h2 = document.createElement("h2");
+  h2.textContent = grupo.cat;
+  const p = document.createElement("p");
+  p.className = "sec-note";
+  p.textContent = grupo.nota;
+  sec.append(h2, p);
+
+  grupo.itens.forEach(it => {
+    const card = document.createElement("div");
+    card.className = "item";
+
+    const info = document.createElement("div");
+    info.className = "info";
+    const nome = document.createElement("p");
+    nome.className = "name";
+    nome.textContent = it.nome;
+    info.appendChild(nome);
+    if (it.obs) {
+      const obs = document.createElement("p");
+      obs.className = "note";
+      obs.textContent = it.obs;
+      info.appendChild(obs);
+    }
+    if (it.cupom) {
+      const btn = document.createElement("button");
+      btn.className = "coupon";
+      btn.type = "button";
+      btn.innerHTML = '<span class="label">Cupom</span><span class="code">' + it.cupom + '</span>';
+      btn.addEventListener("click", async () => {
+        const code = btn.querySelector(".code");
+        const original = code.textContent;
+        try { await navigator.clipboard.writeText(original); code.textContent = "copiado"; }
+        catch { code.textContent = original; }
+        setTimeout(() => { code.textContent = original; }, 1600);
+      });
+      info.appendChild(btn);
+    }
+
+    const a = document.createElement("a");
+    a.className = "go";
+    a.href = it.url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "Abrir na Shopee";
+
+    card.append(info, a);
+    sec.appendChild(card);
+  });
+  lista.appendChild(sec);
+});
+
+const categorias = ["Tudo", ...DADOS.map(g => g.cat)];
+categorias.forEach((c, i) => {
+  const b = document.createElement("button");
+  b.className = "chip";
+  b.type = "button";
+  b.textContent = c;
+  b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+  b.addEventListener("click", () => {
+    [...chips.children].forEach(x => x.setAttribute("aria-pressed", "false"));
+    b.setAttribute("aria-pressed", "true");
+    document.querySelectorAll("section").forEach(s => {
+      s.hidden = !(c === "Tudo" || s.dataset.cat === c);
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  chips.appendChild(b);
+});
+</script>
+</body>
+</html>
